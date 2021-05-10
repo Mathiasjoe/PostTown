@@ -3,7 +3,7 @@ package ntnu.idatx2001.Model;
 /**
  * The type Postal code.
  */
-public class PostalCode {
+public class PostTown {
 
     private String postalCode;
     private String city;
@@ -16,7 +16,7 @@ public class PostalCode {
      * @param city         the city
      * @param municipality the municipality
      */
-    public PostalCode(String postalCode, String city, String municipality) {
+    public PostTown(String postalCode, String city, String municipality) {
         this.postalCode = postalCode;
         this.city = city;
         this.municipality = municipality;
