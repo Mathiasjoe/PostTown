@@ -5,10 +5,19 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Post town register test.
+ */
 public class PostTownRegisterTest {
 
+    /**
+     * The PostTownRegister, register for the Post Towns.
+     */
     PostTownRegister postTowns = new PostTownRegister();
 
+    /**
+     * Test if post town is added to register.
+     */
     @DisplayName("Test if post town is added correctly to the register")
     @Test
     public void testIfPostTownIsAddedToRegister(){
@@ -17,6 +26,9 @@ public class PostTownRegisterTest {
         assertEquals(1, this.postTowns.getTowns().size());
     }
 
+    /**
+     * Test if post town is properly removed from the register.
+     */
     @DisplayName("Test if Post Town is removed from the register")
     @Test
     public void testIfPostTownIsRemovedFromRegister(){
@@ -28,6 +40,9 @@ public class PostTownRegisterTest {
         assertEquals(1, this.postTowns.getTowns().size());
     }
 
+    /**
+     * Test if post town is removed if the post town isn't int the register.
+     */
     @DisplayName("Test if Post Town is removed from the register if the post town isn't in the register")
     @Test
     public void testIfPostTownIsRemovedWhenNotInRegister(){

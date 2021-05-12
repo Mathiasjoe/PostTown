@@ -27,8 +27,8 @@ public class PostTownRegister {
     }
 
     /**
-     * Add new town to the register.
-     *
+     * Add a new town to the register.
+     * Throws an IllegalArgumentException if the added Post Town is null.
      * @param town the town
      */
     public void addNewPostTown(PostTown town){
@@ -49,7 +49,7 @@ public class PostTownRegister {
 
     /**
      * Remove the Town from the register.
-     *
+     * Throws an IllegalArgumentException if the Post town we are trying to remove isn't in the register.
      * @param town the town
      */
     public void removePostTown(PostTown town){
@@ -59,6 +59,15 @@ public class PostTownRegister {
             throw new IllegalArgumentException("Town does not exist");
         }
     }
+
+    /**
+     * Read file the file that get imported. Split the Lines with tab(\t), And use the chosen file path.
+     * Also set the Standard Character Set to UTF-8, so we can read the norwegian letters Æ, Ø and Å.
+     * Use the Index 0, 1 and 3 to get the correct elements from the imported list added to our Table.
+     * @param pathToFile the path to file
+     * @throws IOException  the io exception
+     * @throws CsvException the csv exception
+     */
     public void readFile (String pathToFile) throws IOException, CsvException {
         CSVParser csvParser = new CSVParserBuilder().withSeparator('\t').build();
         try (CSVReader reader = new CSVReaderBuilder(

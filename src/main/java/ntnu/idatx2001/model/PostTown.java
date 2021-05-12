@@ -1,6 +1,5 @@
 package ntnu.idatx2001.model;
 
-import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 /**
  * The type Postal code.

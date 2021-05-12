@@ -52,6 +52,10 @@ public class PrimaryController implements Initializable {
 
     }
 
+    /**
+     * Add dummies to the register, mainly used for testing.
+     * @return the PostTownRegister
+     */
     private PostTownRegister fillWithDummies(){
 
         postTownRegister.addNewPostTown(new PostTown("6005", "Ålesund", "Ålesund"));
@@ -62,13 +66,17 @@ public class PrimaryController implements Initializable {
         return postTownRegister;
     }
 
+    /**
+     * Update the observable list and add the updates to the PostTownRegister.
+     */
     private void updateObservableList(){
         this.observableList.setAll(this.postTownRegister.getTowns());
     }
 
     /**
-     * Search through the observable list.
+     * Search through the observable list, search after the Postal Code or the Name of the city.
      * Uses a lowerCaseFilter so that it doesnt matter if the input is Upper or Lower case.
+     * Set the results from the search in the TableView.
      *
      * @param actionEvent the action event
      */
@@ -92,7 +100,9 @@ public class PrimaryController implements Initializable {
 
     /**
      * Import file, opens window and you can choose between text or csv files.
-     * update the observable list after the file is chosen.
+     * Gets the path to the chosen file and send use the readFile method from postTownRegister to read the file.
+     * Update the observable list.
+     *
      * @throws IOException  the io exception
      * @throws CsvException the csv exception
      */
@@ -116,6 +126,7 @@ public class PrimaryController implements Initializable {
 
     /**
      * Show the about Dialog. Opens a new window with the added information.
+     * Confirm by pressing OK to close Window.
      */
     @FXML public void ShowAboutDialog() {
 
@@ -131,7 +142,7 @@ public class PrimaryController implements Initializable {
 
     /**
      * Close app the application. Pops up an alert to confirm if you want to exit the application.
-     *
+     * Confirm closing by pressing OK, or cancel by pressing CANCEL.
      * @param event the event
      */
     @FXML public void closeApp(ActionEvent event){
