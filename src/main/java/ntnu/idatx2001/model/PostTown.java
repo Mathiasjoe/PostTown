@@ -1,4 +1,4 @@
-package ntnu.idatx2001;
+package ntnu.idatx2001.model;
 
 /**
  * The type Postal code.

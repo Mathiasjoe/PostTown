@@ -46,7 +46,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>ntnu.idatx2001.App</mainClass>
+                    <mainClass>ntnu.idatx2001.ui.views.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>

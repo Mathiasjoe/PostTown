@@ -1,4 +1,4 @@
-package ntnu.idatx2001;
+package ntnu.idatx2001.ui.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +19,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
+import ntnu.idatx2001.model.PostTown;
+import ntnu.idatx2001.model.PostTownRegister;
+import ntnu.idatx2001.ui.views.DialogFactory;
 
 public class PrimaryController implements Initializable {
 
@@ -30,11 +33,6 @@ public class PrimaryController implements Initializable {
     @FXML private TableColumn<PostTown, String> cityCol;
     @FXML private TableColumn<PostTown, String> munCol;
     @FXML private TextField searchField;
-
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -1,4 +1,4 @@
-package ntnu.idatx2001;
+package ntnu.idatx2001.model;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
