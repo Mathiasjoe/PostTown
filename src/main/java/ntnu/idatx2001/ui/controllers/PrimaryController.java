@@ -23,6 +23,9 @@ import ntnu.idatx2001.model.PostTown;
 import ntnu.idatx2001.model.PostTownRegister;
 import ntnu.idatx2001.ui.views.DialogFactory;
 
+/**
+ * The type Primary controller.
+ */
 public class PrimaryController implements Initializable {
 
     private PostTownRegister postTownRegister;
@@ -63,6 +66,12 @@ public class PrimaryController implements Initializable {
         this.observableList.setAll(this.postTownRegister.getTowns());
     }
 
+    /**
+     * Search through the observable list.
+     * Uses a lowerCaseFilter so that it doesnt matter if the input is Upper or Lower case.
+     *
+     * @param actionEvent the action event
+     */
     @FXML public void searchThroughList(KeyEvent actionEvent){
         FilteredList<PostTown> filteredData = new FilteredList<>(observableList, p -> true);
         searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -82,9 +91,10 @@ public class PrimaryController implements Initializable {
     }
 
     /**
-     * Import file.
-     *
+     * Import file, opens window and you can choose between text or csv files.
+     * update the observable list after the file is chosen.
      * @throws IOException  the io exception
+     * @throws CsvException the csv exception
      */
     @FXML public void importFile() throws IOException, CsvException {
         String path;

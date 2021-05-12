@@ -2,6 +2,7 @@ module ntnu.idatx2001 {
     requires javafx.controls;
     requires javafx.fxml;
     requires opencsv;
+    requires org.apache.commons.lang3;
 
     exports ntnu.idatx2001.model;
     opens ntnu.idatx2001.model to javafx.fxml;
