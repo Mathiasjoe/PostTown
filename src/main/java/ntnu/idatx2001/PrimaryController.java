@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
 public class PrimaryController implements Initializable {
@@ -63,7 +64,7 @@ public class PrimaryController implements Initializable {
         this.observableList.setAll(this.postTownRegister.getTowns());
     }
 
-    @FXML public void searchThroughList(){
+    @FXML public void searchThroughList(KeyEvent actionEvent){
         FilteredList<PostTown> filteredData = new FilteredList<>(observableList, p -> true);
         searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             filteredData.setPredicate(postTown -> {
@@ -71,14 +72,9 @@ public class PrimaryController implements Initializable {
                     return true;
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
-                if(postTown.getPostalCode().toLowerCase().contains(lowerCaseFilter)){
-                    return true;
-                } else if(postTown.getCity().toLowerCase().contains(lowerCaseFilter)){
-                    return true;
-                }else if(postTown.getMunicipality().toLowerCase().contains(lowerCaseFilter)){
-                    return true;
-                }
-                return false;
+                return (postTown.getPostalCode().toLowerCase().contains(lowerCaseFilter)) ||
+                    (postTown.getCity().toLowerCase().contains(lowerCaseFilter));
+
             });
         });
         SortedList<PostTown> sortedData = new SortedList<>(filteredData);

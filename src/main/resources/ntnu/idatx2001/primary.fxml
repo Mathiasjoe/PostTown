@@ -32,7 +32,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <TextField fx:id="searchField" onAction="#searchThroughList" />
+            <TextField fx:id="searchField" onKeyPressed="#searchThroughList" />
          </children>
       </VBox>
    </top>

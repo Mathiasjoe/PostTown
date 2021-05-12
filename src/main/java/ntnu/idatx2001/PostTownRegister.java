@@ -64,7 +64,7 @@ public class PostTownRegister {
                 new FileReader(pathToFile)).withCSVParser(csvParser).withSkipLines(1).build()) {
             List<String[]> readList = reader.readAll();
             System.out.println(readList.get(0)[0]);
-            readList.forEach(index -> this.towns.add(new PostTown(index[0],index[1],index[2])));
+            readList.forEach(index -> this.towns.add(new PostTown(index[0],index[1],index[3])));
         }
     }
 
