@@ -38,7 +38,7 @@ public class PrimaryController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         this.postTownRegister = new PostTownRegister();
-        //this.fillWithDummies(); - for testing
+        //this.fillWithDummies(); -for testing
 
         postCodeCol.setCellValueFactory(new PropertyValueFactory<>("PostalCode"));
         cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));
@@ -91,7 +91,8 @@ public class PrimaryController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Files", "*.txt"));
+                new FileChooser.ExtensionFilter(" CSV Files", "*.csv"),
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         File selectedFile = fileChooser.showOpenDialog(null);
         if(selectedFile != null) {
             path = selectedFile.getAbsolutePath();

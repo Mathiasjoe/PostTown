@@ -8,6 +8,7 @@ import com.opencsv.exceptions.CsvException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class PostTownRegister {
     public void readFile (String pathToFile) throws IOException, CsvException {
         CSVParser csvParser = new CSVParserBuilder().withSeparator('\t').build();
         try (CSVReader reader = new CSVReaderBuilder(
-                new FileReader(pathToFile)).withCSVParser(csvParser).withSkipLines(1).build()) {
+                new FileReader(pathToFile, StandardCharsets.ISO_8859_1)).withCSVParser(csvParser).withSkipLines(1).build()) {
             List<String[]> readList = reader.readAll();
             System.out.println(readList.get(0)[0]);
             readList.forEach(index -> this.towns.add(new PostTown(index[0],index[1],index[3])));
