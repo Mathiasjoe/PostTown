@@ -89,7 +89,8 @@ public class PrimaryController implements Initializable {
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
                 return (postTown.getPostalCode().toLowerCase().contains(lowerCaseFilter)) ||
-                    (postTown.getCity().toLowerCase().contains(lowerCaseFilter));
+                    (postTown.getCity().toLowerCase().contains(lowerCaseFilter) ||
+                            postTown.getMunicipality().toLowerCase().contains(lowerCaseFilter));
 
             });
         });

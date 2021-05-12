@@ -28,7 +28,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <TextField fx:id="searchField" onKeyPressed="#searchThroughList" promptText="Search by Postal Code or City Name" />
+            <TextField fx:id="searchField" onKeyPressed="#searchThroughList" promptText="Search by Postal Code , City or Municipality" />
          </children>
       </VBox>
    </top>

@@ -33,7 +33,6 @@ public class PostTownTest {
         PostTown postTown = new PostTown("9602", "Hammerfest", "Hammerfest");
         try{
             postTown.setPostalCode("");
-            fail();
         }catch (IllegalArgumentException e){
             assertTrue(true);
         }
