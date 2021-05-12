@@ -1,19 +1,22 @@
 package ntnu.idatx2001;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.opencsv.exceptions.CsvException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 
 public class PrimaryController implements Initializable {
 
@@ -24,6 +27,7 @@ public class PrimaryController implements Initializable {
     @FXML private TableColumn<PostTown, String> postCodeCol;
     @FXML private TableColumn<PostTown, String> cityCol;
     @FXML private TableColumn<PostTown, String> munCol;
+    @FXML private TextField searchField;
 
     @FXML
     private void switchToSecondary() throws IOException {
@@ -59,18 +63,53 @@ public class PrimaryController implements Initializable {
         this.observableList.setAll(this.postTownRegister.getTowns());
     }
 
-    public ObservableList<PostTown> filterList(String searchText){
-        List<PostTown> list = postTownRegister.getTowns();
-        List<PostTown> filteredList = new ArrayList<>();
-        for (PostTown postTown : list){
-            if(searchOrder(postTown, searchText)) filteredList.add(postTown);
-        }
-        return FXCollections.observableList(filteredList);
+    @FXML public void searchThroughList(){
+        FilteredList<PostTown> filteredData = new FilteredList<>(observableList, p -> true);
+        searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate(postTown -> {
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if(postTown.getPostalCode().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                } else if(postTown.getCity().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }else if(postTown.getMunicipality().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                return false;
+            });
+        });
+        SortedList<PostTown> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(viewDetails.comparatorProperty());
+        viewDetails.setItems(sortedData);
     }
 
-    private boolean searchOrder(PostTown postTown, String searchText){
-        return (postTown.getPostalCode().toLowerCase().contains(searchText.toLowerCase())) ||
-                (postTown.getCity().toLowerCase().contains(searchText.toLowerCase()));
+    /**
+     * Import file.
+     *
+     * @throws IOException  the io exception
+     */
+    @FXML public void importFile() throws IOException, CsvException {
+        String path;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Files", "*.txt"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if(selectedFile != null) {
+            path = selectedFile.getAbsolutePath();
+        } else {
+            path = null;
+        }
+        System.out.println(path);
+        postTownRegister.readFile(path);
+        this.updateObservableList();
     }
+
+
+
+
 
 }
