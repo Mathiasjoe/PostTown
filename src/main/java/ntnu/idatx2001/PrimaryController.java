@@ -3,18 +3,19 @@ package ntnu.idatx2001;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.opencsv.exceptions.CsvException;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -39,7 +40,7 @@ public class PrimaryController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         this.postTownRegister = new PostTownRegister();
-        this.fillWithDummies();
+        //this.fillWithDummies(); - for testing
 
         postCodeCol.setCellValueFactory(new PropertyValueFactory<>("PostalCode"));
         cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));
@@ -102,6 +103,42 @@ public class PrimaryController implements Initializable {
         System.out.println(path);
         postTownRegister.readFile(path);
         this.updateObservableList();
+    }
+
+    /**
+     * Show the about Dialog. Opens a new window with the added information.
+     */
+    @FXML public void ShowAboutDialog() {
+
+        Alert alert = new DialogFactory().createAlert(Alert.AlertType.CONFIRMATION,
+                "Information Dialog - About",
+                "Post Town Register",
+                "A Fantastic Application by\n"
+                        + "(C) Mathias Jørgensen\n"
+                        + "v0.1 2021-05-12");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Close app the application. Pops up an alert to confirm if you want to exit the application.
+     *
+     * @param event the event
+     */
+    @FXML public void closeApp(ActionEvent event){
+        Alert alert = new DialogFactory().createAlert(Alert.AlertType.CONFIRMATION,
+                "Confirmation",
+                "Exit the Application",
+                "Are your sure you want to Exit the Application?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent()){
+            if(result.get() == ButtonType.OK){
+                Platform.exit();
+            }
+        }
+
     }
 
 
