@@ -31,11 +31,16 @@ public class PrimaryController implements Initializable {
     private PostTownRegister postTownRegister;
     private ObservableList<PostTown> observableList;
 
-    @FXML private TableView<PostTown> viewDetails;
-    @FXML private TableColumn<PostTown, String> postCodeCol;
-    @FXML private TableColumn<PostTown, String> cityCol;
-    @FXML private TableColumn<PostTown, String> munCol;
-    @FXML private TextField searchField;
+    @FXML
+    private TableView<PostTown> viewDetails;
+    @FXML
+    private TableColumn<PostTown, String> postCodeCol;
+    @FXML
+    private TableColumn<PostTown, String> cityCol;
+    @FXML
+    private TableColumn<PostTown, String> munCol;
+    @FXML
+    private TextField searchField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,9 +59,10 @@ public class PrimaryController implements Initializable {
 
     /**
      * Add dummies to the register, mainly used for testing.
+     *
      * @return the PostTownRegister
      */
-    private PostTownRegister fillWithDummies(){
+    private PostTownRegister fillWithDummies() {
 
         postTownRegister.addNewPostTown(new PostTown("6005", "Ålesund", "Ålesund"));
         postTownRegister.addNewPostTown(new PostTown("9602", "Hammerfest", "Hammerfest"));
@@ -69,7 +75,7 @@ public class PrimaryController implements Initializable {
     /**
      * Update the observable list and add the updates to the PostTownRegister.
      */
-    private void updateObservableList(){
+    private void updateObservableList() {
         this.observableList.setAll(this.postTownRegister.getTowns());
     }
 
@@ -80,17 +86,18 @@ public class PrimaryController implements Initializable {
      *
      * @param actionEvent the action event
      */
-    @FXML public void searchThroughList(KeyEvent actionEvent){
+    @FXML
+    public void searchThroughList(KeyEvent actionEvent) {
         FilteredList<PostTown> filteredData = new FilteredList<>(observableList, p -> true);
         searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             filteredData.setPredicate(postTown -> {
-                if(newValue == null || newValue.isEmpty()){
+                if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
                 return (postTown.getPostalCode().toLowerCase().contains(lowerCaseFilter)) ||
-                    (postTown.getCity().toLowerCase().contains(lowerCaseFilter) ||
-                            postTown.getMunicipality().toLowerCase().contains(lowerCaseFilter));
+                        (postTown.getCity().toLowerCase().contains(lowerCaseFilter) ||
+                                postTown.getMunicipality().toLowerCase().contains(lowerCaseFilter));
 
             });
         });
@@ -107,15 +114,16 @@ public class PrimaryController implements Initializable {
      * @throws IOException  the io exception
      * @throws CsvException the csv exception
      */
-    @FXML public void importFile() throws IOException, CsvException {
+    @FXML
+    public void importFile() throws IOException, CsvException {
         String path;
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter(" CSV Files", "*.csv"),
-                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        if(selectedFile != null) {
+        if (selectedFile != null) {
             path = selectedFile.getAbsolutePath();
         } else {
             path = null;
@@ -129,7 +137,8 @@ public class PrimaryController implements Initializable {
      * Show the about Dialog. Opens a new window with the added information.
      * Confirm by pressing OK to close Window.
      */
-    @FXML public void ShowAboutDialog() {
+    @FXML
+    public void showAboutDialog() {
 
         Alert alert = new DialogFactory().createAlert(Alert.AlertType.CONFIRMATION,
                 "Information Dialog - About",
@@ -144,9 +153,11 @@ public class PrimaryController implements Initializable {
     /**
      * Close app the application. Pops up an alert to confirm if you want to exit the application.
      * Confirm closing by pressing OK, or cancel by pressing CANCEL.
+     *
      * @param event the event
      */
-    @FXML public void closeApp(ActionEvent event){
+    @FXML
+    public void closeApp(ActionEvent event) {
         Alert alert = new DialogFactory().createAlert(Alert.AlertType.CONFIRMATION,
                 "Confirmation",
                 "Exit the Application",
@@ -154,8 +165,8 @@ public class PrimaryController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
 
-        if(result.isPresent()){
-            if(result.get() == ButtonType.OK){
+        if (result.isPresent()) {
+            if (result.get() == ButtonType.OK) {
                 Platform.exit();
             }
         }

@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The type Post town register test.
+ * The type post town register test.
  */
 public class PostTownRegisterTest {
 
     /**
-     * The PostTownRegister, register for the Post Towns.
+     * The PostTownRegister, register for the post towns.
      */
     PostTownRegister postTowns = new PostTownRegister();
 
@@ -20,7 +20,7 @@ public class PostTownRegisterTest {
      */
     @DisplayName("Test if post town is added correctly to the register")
     @Test
-    public void testIfPostTownIsAddedToRegister(){
+    public void testIfPostTownIsAddedToRegister() {
         PostTown postTown = new PostTown("9602", "Hammerfest", "Hammerfest");
         this.postTowns.addNewPostTown(postTown);
         assertEquals(1, this.postTowns.getTowns().size());
@@ -31,7 +31,7 @@ public class PostTownRegisterTest {
      */
     @DisplayName("Test if Post Town is removed from the register")
     @Test
-    public void testIfPostTownIsRemovedFromRegister(){
+    public void testIfPostTownIsRemovedFromRegister() {
         PostTown postTown1 = new PostTown("9602", "Hammerfest", "Hammerfest");
         PostTown postTown2 = new PostTown("9690", "Havøysund", "Måsøy");
         this.postTowns.addNewPostTown(postTown1);
@@ -45,13 +45,13 @@ public class PostTownRegisterTest {
      */
     @DisplayName("Test if Post Town is removed from the register if the post town isn't in the register")
     @Test
-    public void testIfPostTownIsRemovedWhenNotInRegister(){
+    public void testIfPostTownIsRemovedWhenNotInRegister() {
         PostTown postTown1 = new PostTown("9602", "Hammerfest", "Hammerfest");
         PostTown postTown2 = new PostTown("9690", "Havøysund", "Måsøy");
         this.postTowns.addNewPostTown(postTown2);
-        try{
+        try {
             this.postTowns.removePostTown(postTown1);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
         }
     }

@@ -1,12 +1,13 @@
 package ntnu.idatx2001.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The type Post town test.
+ * The type post town test.
  */
 public class PostTownTest {
 
@@ -14,9 +15,9 @@ public class PostTownTest {
     /**
      * Test if post town is added correctly.
      */
-    @DisplayName("Test that a Post town will be added with the correct parameters")
+    @DisplayName("Test that a post town will be added with the correct parameters")
     @Test
-    public void testIfPostTownIsAddedCorrectly(){
+    public void testIfPostTownIsAddedCorrectly() {
         PostTown postTown = new PostTown("9602", "Hammerfest", "Hammerfest");
         assertEquals("9602", postTown.getPostalCode());
         assertEquals("Hammerfest", postTown.getCity());
@@ -27,15 +28,16 @@ public class PostTownTest {
     /**
      * Test that post town cannot be added with wrong postal code.
      */
-    @DisplayName("Test if a post Town cannot be added with a blank postal code")
+    @DisplayName("Test if a post town cannot be added with a blank postal code")
     @Test
-   public void testThatPostTownCannotBeAddedWithWrongPostalCode(){
+    public void testThatPostTownCannotBeAddedWithWrongPostalCode() {
         PostTown postTown = new PostTown("9602", "Hammerfest", "Hammerfest");
-        try{
+        try {
             postTown.setPostalCode("");
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
         }
-   }
+    }
+
 
 }
