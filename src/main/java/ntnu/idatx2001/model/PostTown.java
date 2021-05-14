@@ -16,11 +16,12 @@ public class PostTown {
      * @param postalCode   the postal code
      * @param city         the city
      * @param municipality the municipality
+     * @Throws IllegalArgumentException if one of the String input is blank.
      */
     public PostTown(String postalCode, String city, String municipality) {
         if (StringUtils.isBlank(postalCode) || StringUtils.isBlank(city) ||
                 StringUtils.isBlank(municipality)) {
-            throw new IllegalArgumentException("Fields cannot be blank or null");
+            throw new IllegalArgumentException("Input cannot be blank");
         } else {
             this.postalCode = postalCode;
             this.city = city;
@@ -49,7 +50,7 @@ public class PostTown {
         } else if (StringUtils.length(this.postalCode) != 4) {
             throw new IllegalArgumentException("Postal code must be a 4 digit number");
         } else if (StringUtils.isBlank(this.postalCode)) {
-            throw new IllegalArgumentException("String cannot be blank");
+            throw new IllegalArgumentException("Postal code cannot be blank");
         } else {
             this.postalCode = postalCode;
         }
@@ -72,9 +73,9 @@ public class PostTown {
      */
     public void setCity(String city) {
         if (this.city == null) {
-            throw new IllegalArgumentException("Field cannot be null");
+            throw new IllegalArgumentException("City input cannot be null");
         } else if (StringUtils.isBlank(this.city)) {
-            throw new IllegalArgumentException("Field cannot be blank");
+            throw new IllegalArgumentException("City input cannot be blank");
         } else {
             this.city = city;
         }
@@ -97,9 +98,9 @@ public class PostTown {
      */
     public void setMunicipality(String municipality) {
         if (this.municipality == null) {
-            throw new IllegalArgumentException("Field cannot be null");
+            throw new IllegalArgumentException("Municipality cannot be null");
         } else if (StringUtils.isBlank(this.municipality)) {
-            throw new IllegalArgumentException("Field cannot be blank");
+            throw new IllegalArgumentException("Municipality cannot be blank");
         } else {
             this.municipality = municipality;
         }
